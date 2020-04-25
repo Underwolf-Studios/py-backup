@@ -22,9 +22,30 @@ def on_selection_changed(selection):
         print("")
     return True
 
+def open_file_dialog(self):
+
+    # Set dialog
+    file_dialog = Gtk.FileChooserDialog(
+                title = "Select the File", parent = None, action = Gtk.FileChooserAction.OPEN)
+    
+    # Set buttons for dialog
+    file_dialog.add_buttons ("Cancel", Gtk.ResponseType.CANCEL,"Open", Gtk.ResponseType.OK) 
+    response = file_dialog.run()
+
+    # Button responses
+    if response == Gtk.ResponseType.OK:
+        print("Open Button")
+        print("File: "+ file_dialog.get_filename())
+    elif response == Gtk.ResponseType.CANCEL:
+        print("Cancel")
+
+    #Close dialog after finishing
+    file_dialog.destroy()
+
 handlers = {
     "on_button_add_clicked": additem,
-    "on_selection_changed": on_selection_changed
+    "on_selection_changed": on_selection_changed,
+    "on_botton_browse_clicked": open_file_dialog
 }
 builder.connect_signals(handlers)
 
