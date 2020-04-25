@@ -44,7 +44,6 @@ def add_item(path):
     finally:
         f.close()
 
-
 def on_button_add_clicked(self):
     # Get path from text field
     path = builder.get_object("entry_path").get_text()
@@ -77,12 +76,21 @@ def on_selection_changed(selection):
         print("")
     return True
 
-
-def open_file_dialog(self):
-    # Set dialog
+def on_button_openfile_clicked(self):
+    # Set dialog for file selection
     file_dialog = Gtk.FileChooserDialog(
         title="Select the File", parent=None, action=Gtk.FileChooserAction.OPEN)
+    file_dialog.set_select_multiple(True)
+    button_response_dialog(file_dialog)
 
+def on_button_openfolder_clicked(self):
+    # Set dialog for folder selection
+    file_dialog = Gtk.FileChooserDialog(
+        title="Select the File", parent=None, action=Gtk.FileChooserAction.SELECT_FOLDER)
+    file_dialog.set_select_multiple(True)
+    button_response_dialog(file_dialog)
+
+def button_response_dialog(file_dialog):
     # Set buttons for dialog
     file_dialog.add_buttons(
         "Cancel", Gtk.ResponseType.CANCEL, "Open", Gtk.ResponseType.OK)
@@ -96,12 +104,12 @@ def open_file_dialog(self):
     # Close dialog after finishing
     file_dialog.destroy()
 
-
 handlers = {
     "on_button_add_clicked": on_button_add_clicked,
     "on_button_backup_clicked": on_button_backup_clicked,
     "on_selection_changed": on_selection_changed,
-    "on_botton_browse_clicked": open_file_dialog
+    "on_button_openfolder_clicked": on_button_openfolder_clicked,
+    "on_button_openfile_clicked": on_button_openfile_clicked
 }
 builder.connect_signals(handlers)
 
