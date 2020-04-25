@@ -36,6 +36,7 @@ def open_file_dialog(self):
     if response == Gtk.ResponseType.OK:
         print("Open Button")
         print("File: "+ file_dialog.get_filename())
+        print("Size: "+ str(os.path.getsize(file_dialog.get_filename())))
     elif response == Gtk.ResponseType.CANCEL:
         print("Cancel")
 
