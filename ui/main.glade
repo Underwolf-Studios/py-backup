@@ -11,92 +11,130 @@
     </columns>
   </object>
   <object class="GtkWindow" id="main">
-    <property name="width_request">1040</property>
-    <property name="height_request">920</property>
     <property name="can_focus">False</property>
-    <property name="default_width">520</property>
-    <property name="default_height">860</property>
     <child type="titlebar">
       <placeholder/>
     </child>
     <child>
-      <object class="GtkFixed" id="fixed">
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkButton" id="button_openfolder">
-            <property name="label" translatable="yes">Open Folder...</property>
-            <property name="width_request">490</property>
-            <property name="height_request">40</property>
+          <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_button_openfolder_clicked" swapped="no"/>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkButton" id="button_openfolder">
+                <property name="label" translatable="yes">Open Folder...</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="margin_left">20</property>
+                <property name="margin_right">10</property>
+                <property name="margin_top">20</property>
+                <property name="hexpand">True</property>
+                <signal name="clicked" handler="on_button_openfolder_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_openfile">
+                <property name="label" translatable="yes">Open File...</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="margin_left">10</property>
+                <property name="margin_right">20</property>
+                <property name="margin_top">20</property>
+                <property name="hexpand">True</property>
+                <signal name="clicked" handler="on_button_openfile_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
-            <property name="x">20</property>
-            <property name="y">20</property>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="entry_path">
-            <property name="width_request">880</property>
-            <property name="height_request">40</property>
+          <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkEntry" id="entry_path">
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="margin_left">20</property>
+                <property name="margin_right">10</property>
+                <property name="margin_top">20</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_add">
+                <property name="label" translatable="yes">Add</property>
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="margin_left">10</property>
+                <property name="margin_right">20</property>
+                <property name="margin_top">20</property>
+                <signal name="clicked" handler="on_button_add_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
-            <property name="x">20</property>
-            <property name="y">80</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="button_add">
-            <property name="label" translatable="yes">Add</property>
-            <property name="width_request">100</property>
-            <property name="height_request">40</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_button_add_clicked" swapped="no"/>
-          </object>
-          <packing>
-            <property name="x">920</property>
-            <property name="y">80</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="button_backup">
-            <property name="label" translatable="yes">Backup</property>
-            <property name="width_request">1000</property>
-            <property name="height_request">40</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_button_backup_clicked" swapped="no"/>
-          </object>
-          <packing>
-            <property name="x">20</property>
-            <property name="y">860</property>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
           <object class="GtkScrolledWindow">
-            <property name="width_request">1000</property>
-            <property name="height_request">700</property>
+            <property name="width_request">800</property>
+            <property name="height_request">600</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="shadow_type">in</property>
             <child>
               <object class="GtkTreeView" id="treeview">
-                <property name="width_request">1000</property>
-                <property name="height_request">700</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="margin_left">20</property>
+                <property name="margin_right">20</property>
+                <property name="margin_top">20</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
                 <property name="model">liststore</property>
                 <property name="search_column">0</property>
                 <child internal-child="selection">
-                  <object class="GtkTreeSelection">
+                  <object class="GtkTreeSelection" id="selection">
                     <signal name="changed" handler="on_selection_changed" swapped="no"/>
                   </object>
                 </child>
@@ -127,23 +165,28 @@
             </child>
           </object>
           <packing>
-            <property name="x">20</property>
-            <property name="y">140</property>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="button_openfile">
-            <property name="label" translatable="yes">Open File...</property>
-            <property name="width_request">490</property>
+          <object class="GtkButton" id="button_backup">
+            <property name="label" translatable="yes">Backup</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_button_openfile_clicked" swapped="no"/>
+            <property name="margin_left">20</property>
+            <property name="margin_right">20</property>
+            <property name="margin_top">20</property>
+            <property name="margin_bottom">20</property>
+            <signal name="clicked" handler="on_button_backup_clicked" swapped="no"/>
           </object>
           <packing>
-            <property name="x">530</property>
-            <property name="y">20</property>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>
