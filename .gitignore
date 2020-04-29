@@ -1,4 +1,5 @@
+venv
 .vscode
 *.glade~
 *.zip
-src/__pycache__
+__pycache__
