@@ -8,7 +8,6 @@ from gi.repository import Gtk
 import functions
 import utils
 
-
 # Builder
 builder = Gtk.Builder()
 builder.add_from_file("ui/main.glade")
@@ -18,10 +17,10 @@ window_main = builder.get_object("window_main")
 window_main.connect('delete-event', Gtk.main_quit)
 
 window_backup = builder.get_object("window_backup")
-window_backup.connect('delete-event', window_backup.close)
+window_backup.connect('delete-event', lambda w, e: w.hide() or True)
 
 window_create = builder.get_object("window_create")
-window_create.connect('delete-event', window_create.close)
+window_create.connect('delete-event', lambda w, e: w.hide() or True)
 
 # Objects
 liststore = builder.get_object("liststore_files")
@@ -59,10 +58,10 @@ class Handlers:
         return True
 
     def on_button_backup_clicked(self, button):
-        window_create.show_all()
+        window_create.show()
 
     def on_button_newbackup_clicked(self, button):
-        window_backup.show_all()
+        window_backup.show()
 
     # TODO: get treeview selection
     def on_button_removebackup_clicked(self, button):
@@ -75,12 +74,11 @@ class Handlers:
         try:
             filename = builder.get_object("entry_filename").get_text()
             functions.backup(liststore, filename, check_date, check_version, builder)
-        except IOError:
+        except:
             utils.message("error", "Sorry, something went wrong.")
-            print(IOError)
 
-        window_create.close()
-        window_backup.close()
+        window_create.hide()
+        window_backup.hide()
 
     def on_check_date_toggled(self, button):
         global check_date

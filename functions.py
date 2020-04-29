@@ -10,11 +10,10 @@ def add_item(liststore, path):
         f = open(path)
         size = os.path.getsize(path)
         liststore.append([path, round(size / 1024 / 1024, 2)])
+        f.close()
     except IOError:
         utils.message("error", "File does not exist.")
         return
-    finally:
-        f.close()
 
 
 def remove_item(liststore, path):
