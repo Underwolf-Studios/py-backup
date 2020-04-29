@@ -16,8 +16,13 @@ def add_item(liststore, path):
         return
 
 
-def remove_item(liststore, path):
-    utils.message("info", "Not implemented yet")
+def remove_item(treeview, liststore):
+    selection = treeview.get_selection()
+    model, paths = selection.get_selected_rows()
+
+    for path in paths:
+        iter = model.get_iter(path)
+        model.remove(iter)
 
 
 def backup(liststore, filename, check_date, check_version, builder):
@@ -35,7 +40,7 @@ def backup(liststore, filename, check_date, check_version, builder):
         name = f"{filename}_{date}_v{str(spin_version.get_value_as_int())}"
 
     # Create zipfile
-    with zipfile.ZipFile(name + ".zip", 'w') as zf:
+    with zipfile.ZipFile("backups/" + name + ".zip", 'w') as zf:
         for i in range(0, len(liststore)):
             # Add all paths and sizes to the files dict
             files[liststore[i][0]] = liststore[i][1]

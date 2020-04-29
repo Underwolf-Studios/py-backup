@@ -24,6 +24,8 @@ window_create.connect('delete-event', lambda w, e: w.hide() or True)
 
 # Objects
 liststore = builder.get_object("liststore_files")
+treeview_backups = builder.get_object("treeview_backups")
+treeview_files = builder.get_object("treeview_files")
 
 # Variables
 check_date = False
@@ -63,12 +65,11 @@ class Handlers:
     def on_button_newbackup_clicked(self, button):
         window_backup.show()
 
-    # TODO: get treeview selection
     def on_button_removebackup_clicked(self, button):
-        functions.remove_item(liststore, "path")
+        functions.remove_item(treeview_backups, liststore)
 
     def on_button_removepath_clicked(self, button):
-        functions.remove_item(liststore, "path")
+        functions.remove_item(treeview_files, liststore)
 
     def on_button_create_clicked(self, button):
         try:
