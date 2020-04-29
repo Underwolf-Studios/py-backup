@@ -34,7 +34,7 @@ def backup(liststore, filename, check_date, check_version, builder):
 
     if check_date == True and check_version == False:
         name = f"{filename}_{date}"
-    elif check_date == True == False and check_version == True:
+    elif check_date == False and check_version == True:
         name = f"{filename}_v{str(spin_version.get_value_as_int())}"
     elif check_date == True and check_version == True:
         name = f"{filename}_{date}_v{str(spin_version.get_value_as_int())}"
