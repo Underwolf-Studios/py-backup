@@ -11,6 +11,12 @@ from gi.repository import Gtk
 builder = Gtk.Builder()
 builder.add_from_file("src/ui/main.glade")
 
+window_backup = builder.get_object("window_backup")
+window_backup.connect('delete-event', window_backup.close)
+
+window_create = builder.get_object("window_create")
+window_create.connect('delete-event', window_create.close)
+
 liststore = builder.get_object("liststore_files")
 
 
@@ -42,13 +48,10 @@ class Handlers:
         return True
 
     def on_button_backup_clicked(self, button):
-        functions.backup(liststore)
+        window_create.show_all()
 
     def on_button_newbackup_clicked(self, button):
-        # Open create backup window
-        window_create = builder.get_object("window_create")
-        window_create.connect('delete-event', window_create.close)
-        window_create.show_all()
+        window_backup.show_all()
 
     # TODO: get treeview selection
     def on_button_removebackup_clicked(self, button):
@@ -56,6 +59,16 @@ class Handlers:
 
     def on_button_removepath_clicked(self, button):
         functions.remove_item(liststore, "path")
+
+    def on_button_create_clicked(self, button):
+        try:
+            filename = builder.get_object("entry_filename").get_text()
+            functions.backup(liststore, filename)
+        except:
+            utils.message("error", "Sorry, something went wrong.")
+
+        window_create.close()
+        window_backup.close()
 
 
 builder.connect_signals(Handlers())
