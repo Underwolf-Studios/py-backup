@@ -1,2 +1,4 @@
 .vscode
 *.glade~
+*.zip
+src/__pycache__
