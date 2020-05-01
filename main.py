@@ -23,41 +23,23 @@ window_create = builder.get_object("window_create")
 window_create.connect('delete-event', lambda w, e: w.hide() or True)
 
 # Objects
-liststore = builder.get_object("liststore_files")
+liststore_files = builder.get_object("liststore_files")
 treeview_backups = builder.get_object("treeview_backups")
 treeview_files = builder.get_object("treeview_files")
-
-# Variables
-check_date = False
-check_version = False
+check_timestamp = builder.get_object("check_timestamp")
+check_version = builder.get_object("check_version")
 
 
 class Handlers:
     def on_button_openfolder_clicked(self, button):
-        utils.open_filechooser("folder", liststore)
+        utils.open_filechooser("folder", liststore_files)
 
     def on_button_openfile_clicked(self, button):
-        utils.open_filechooser("file", liststore)
+        utils.open_filechooser("file", liststore_files)
 
     def on_button_add_clicked(self, button):
         path = builder.get_object("entry_path").get_text()
-        functions.add_item(liststore, path)
-
-    def on_selection_files_changed(self, selection):
-        # Get treeview selection
-        (model, iter) = selection.get_selected()
-
-        if iter is not None:
-            print("Path: " + (model[iter][0]) + " Size: " + str((model[iter][1])))
-        return True
-
-    def on_selection_backups_changed(self, selection):
-        # Get treeview selection
-        (model, iter) = selection.get_selected()
-
-        if iter is not None:
-            print("Path: " + (model[iter][0]) + " Size: " + str((model[iter][1])))
-        return True
+        functions.add_item(liststore_files, path)
 
     def on_button_backup_clicked(self, button):
         window_create.show()
@@ -66,36 +48,17 @@ class Handlers:
         window_backup.show()
 
     def on_button_removebackup_clicked(self, button):
-        functions.remove_item(treeview_backups, liststore)
+        functions.remove_item(treeview_backups)
 
     def on_button_removepath_clicked(self, button):
-        functions.remove_item(treeview_files, liststore)
+        functions.remove_item(treeview_files)
 
     def on_button_create_clicked(self, button):
-        try:
-            filename = builder.get_object("entry_filename").get_text()
-            functions.backup(liststore, filename, check_date, check_version, builder)
-        except:
-            utils.message("error", "Sorry, something went wrong.")
+        filename = builder.get_object("entry_filename").get_text()
+        functions.backup(liststore_files, filename, check_timestamp.get_active(), check_version.get_active(), builder)
 
         window_create.hide()
         window_backup.hide()
-
-    def on_check_date_toggled(self, button):
-        global check_date
-
-        if button.get_active():
-            check_date = True
-        else:
-            check_date = False
-
-    def on_check_version_toggled(self, button):
-        global check_version
-
-        if button.get_active():
-            check_version = True
-        else:
-            check_version = False
 
 
 builder.connect_signals(Handlers())

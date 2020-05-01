@@ -7,37 +7,33 @@ import utils
 
 def add_item(liststore, path):
     try:
-        f = open(path)
         size = os.path.getsize(path)
-        liststore.append([path, round(size / 1024 / 1024, 2)])
-        f.close()
-    except IOError:
+        liststore.append([path, str(round(size / 1024 / 1024, 2))])
+    except:
         utils.message("error", "File does not exist.")
-        return
 
 
-def remove_item(treeview, liststore):
-    selection = treeview.get_selection()
-    model, paths = selection.get_selected_rows()
+def remove_item(treeview):
+    store, paths = treeview.get_selection().get_selected_rows()
 
     for path in paths:
-        iter = model.get_iter(path)
-        model.remove(iter)
+        iter = store.get_iter(path)
+        store.remove(iter)
 
 
-def backup(liststore, filename, check_date, check_version, builder):
+def backup(liststore, filename, check_timestamp, check_version, builder):
     files = {}
     name = filename
-    date = "{0:%Y%m%d_%H%M}".format(datetime.datetime.now())
+    timestamp = "{0:%Y%m%d_%H%M}".format(datetime.datetime.now())
 
     spin_version = builder.get_object("spin_version")
 
-    if check_date == True and check_version == False:
-        name = f"{filename}_{date}"
-    elif check_date == False and check_version == True:
+    if check_timestamp and not check_version:
+        name = f"{filename}_{timestamp}"
+    elif not check_timestamp and check_version:
         name = f"{filename}_v{str(spin_version.get_value_as_int())}"
-    elif check_date == True and check_version == True:
-        name = f"{filename}_{date}_v{str(spin_version.get_value_as_int())}"
+    elif check_timestamp and check_version:
+        name = f"{filename}_{timestamp}_v{str(spin_version.get_value_as_int())}"
 
     # Create zipfile
     with zipfile.ZipFile("backups/" + name + ".zip", 'w') as zf:

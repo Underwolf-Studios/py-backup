@@ -69,13 +69,12 @@
             <property name="can_focus">False</property>
             <property name="spacing">20</property>
             <child>
-              <object class="GtkCheckButton" id="check_date">
-                <property name="label" translatable="yes">Add time and date</property>
+              <object class="GtkCheckButton" id="check_timestamp">
+                <property name="label" translatable="yes">Add timestamp</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="draw_indicator">True</property>
-                <signal name="toggled" handler="on_check_date_toggled" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -95,7 +94,6 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
                     <property name="draw_indicator">True</property>
-                    <signal name="toggled" handler="on_check_version_toggled" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -152,28 +150,28 @@
       <!-- column-name path -->
       <column type="gchararray"/>
       <!-- column-name size -->
-      <column type="gfloat"/>
+      <column type="gchararray"/>
     </columns>
     <data>
       <row>
         <col id="0" translatable="yes">Local</col>
-        <col id="1">0</col>
+        <col id="1" translatable="yes"> </col>
       </row>
       <row>
         <col id="0" translatable="yes">Google Drive</col>
-        <col id="1">0</col>
+        <col id="1" translatable="yes"> </col>
       </row>
       <row>
         <col id="0" translatable="yes">Dropbox</col>
-        <col id="1">0</col>
+        <col id="1" translatable="yes"> </col>
       </row>
       <row>
         <col id="0" translatable="yes">configs_27.04.2020</col>
-        <col id="1">0</col>
+        <col id="1" translatable="yes">123</col>
       </row>
       <row>
         <col id="0" translatable="yes">configs_23.04.2020</col>
-        <col id="1">0</col>
+        <col id="1" translatable="yes">12</col>
       </row>
     </data>
   </object>
@@ -220,9 +218,7 @@
                 <property name="search_column">0</property>
                 <property name="level_indentation">1</property>
                 <child internal-child="selection">
-                  <object class="GtkTreeSelection" id="selection_backups">
-                    <signal name="changed" handler="on_selection_backups_changed" swapped="no"/>
-                  </object>
+                  <object class="GtkTreeSelection" id="selection_backups"/>
                 </child>
                 <child>
                   <object class="GtkTreeViewColumn" id="column_backup">
@@ -285,7 +281,7 @@
       <!-- column-name path -->
       <column type="gchararray"/>
       <!-- column-name size -->
-      <column type="gfloat"/>
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkPopover" id="popover_open">
@@ -433,9 +429,7 @@
                 <property name="model">liststore_files</property>
                 <property name="search_column">0</property>
                 <child internal-child="selection">
-                  <object class="GtkTreeSelection" id="selection_files">
-                    <signal name="changed" handler="on_selection_files_changed" swapped="no"/>
-                  </object>
+                  <object class="GtkTreeSelection" id="selection_files"/>
                 </child>
                 <child>
                   <object class="GtkTreeViewColumn" id="column_path">

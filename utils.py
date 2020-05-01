@@ -20,10 +20,10 @@ def message(msg_type, message):
 
 def open_filechooser(fc_type, liststore):
     if fc_type == "file":
-        title = "Select File"
+        title = "Select file"
         fc_action = Gtk.FileChooserAction.OPEN
     elif fc_type == "folder":
-        title = "Select Folder"
+        title = "Select folder"
         fc_action = Gtk.FileChooserAction.SELECT_FOLDER
 
     file_dialog = Gtk.FileChooserDialog(title=title, action=fc_action, parent=None)
