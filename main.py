@@ -24,10 +24,14 @@ window_create.connect('delete-event', lambda w, e: w.hide() or True)
 
 # Objects
 liststore_files = builder.get_object("liststore_files")
+treestore_backups = builder.get_object("treestore_backups")
 treeview_backups = builder.get_object("treeview_backups")
 treeview_files = builder.get_object("treeview_files")
 check_timestamp = builder.get_object("check_timestamp")
 check_version = builder.get_object("check_version")
+
+
+functions.check_local(treestore_backups)
 
 
 class Handlers:
@@ -56,6 +60,8 @@ class Handlers:
     def on_button_create_clicked(self, button):
         filename = builder.get_object("entry_filename").get_text()
         functions.backup(liststore_files, filename, check_timestamp.get_active(), check_version.get_active(), builder)
+
+        functions.check_local(treestore_backups)
 
         window_create.hide()
         window_backup.hide()

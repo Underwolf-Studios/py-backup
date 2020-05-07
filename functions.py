@@ -7,8 +7,8 @@ import utils
 
 def add_item(liststore, path):
     try:
-        size = os.path.getsize(path)
-        liststore.append([path, str(round(size / 1024 / 1024, 2))])
+        size = str(round(os.path.getsize(path) / 1024 / 1024, 2))
+        liststore.append([path, size])
     except:
         utils.message("error", "File does not exist.")
 
@@ -44,3 +44,24 @@ def backup(liststore, filename, check_timestamp, check_version, builder):
 
     # Calculate total size and show dialog
     utils.message("info", name + ".zip created. Total filesize: " + str(round(sum(files.values()), 2)) + "MB")
+
+
+def check_local(treestore):
+    path = "backups/"
+    files = os.listdir(path)
+
+    treestore.clear()
+
+    iter = treestore.append(None, ["Local", " "])
+
+    for file in files:
+        size = str(round(os.path.getsize(path + file) / 1024 / 1024, 2))
+        treestore.append(iter, [str(file), size])
+
+
+def check_googledrive(treestore):
+    pass
+
+
+def check_dropbox(treestore):
+    pass
