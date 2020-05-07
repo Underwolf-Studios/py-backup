@@ -16,7 +16,7 @@ def add_item(liststore, path):
 def remove_item(treeview):
     store, paths = treeview.get_selection().get_selected_rows()
 
-    for path in paths:
+    for path in reversed(paths):
         iter = store.get_iter(path)
         store.remove(iter)
 
